@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * To start the application:
  * ./gradlew build
- * java -jar ./L01-gradle/build/libs/gradleHelloOtus-0.1.jar
+ * java -jar ./hw01-gradle/build/libs/gradleHelloOtus-0.1.jar
  */
 public class HelloOtus {
 
