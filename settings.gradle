@@ -1,4 +1,7 @@
 rootProject.name = 'otusJavaHomework'
 include 'hw01-gradle'
 include 'hw02-collections'
+include 'hw07-structuralPatterns'
+include 'hw08-io'
+include 'hw08-io:homework'
 
