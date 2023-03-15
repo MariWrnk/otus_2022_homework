@@ -2,7 +2,6 @@ package ru.otus.dataprocessor;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import ru.otus.model.Measurement;
 
 import java.io.IOException;
