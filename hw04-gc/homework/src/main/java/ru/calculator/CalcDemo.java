@@ -13,11 +13,6 @@ package ru.calculator;
 
 import java.time.LocalDateTime;
 
-
-//ПР: код + файлы со статистикой  выводами (ktxt? markdown)
-// оптимизац: радикально код менять не надо (что показали)
-// считаем -> оптимиз
-
 public class CalcDemo {
     public static void main(String[] args) {
         long counter = 100_000_000;
