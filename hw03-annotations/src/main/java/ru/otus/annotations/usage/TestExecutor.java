@@ -11,13 +11,22 @@ import java.util.List;
 
 public class TestExecutor {
 
-    public void runTests(String className) throws ClassNotFoundException {
+    private final List<String> beforeMethodNames = new ArrayList<>();
+    private final List<String> afterMethodNames = new ArrayList<>();
+    private final List<String> testMethodNames = new ArrayList<>();
+
+    private int succeedTestCount = 0;
+    private int failedTestCount = 0;
+
+    public void execute(String className) throws ClassNotFoundException {
         Class<?> testClass = Class.forName(className);
 
-        List<String> beforeMethodNames = new ArrayList<>();
-        List<String> afterMethodNames = new ArrayList<>();
-        List<String> testMethodNames = new ArrayList<>();
+        prepareTests(testClass);
+        runTests(testClass);
+        printResult();
+    }
 
+    private void prepareTests(Class<?> testClass) {
         for (Method method : testClass.getDeclaredMethods()) {
             if (method.isAnnotationPresent(Test.class)) {
                 testMethodNames.add(method.getName());
@@ -27,10 +36,9 @@ public class TestExecutor {
                 afterMethodNames.add(method.getName());
             }
         }
+    }
 
-        int succeed = 0;
-        int failed = 0;
-
+    private void runTests(Class<?> testClass) {
         for (String testMethodName : testMethodNames) {
             Object instance = ReflectionHelper.instantiate(testClass);
             boolean success = true;
@@ -45,17 +53,18 @@ public class TestExecutor {
 
             if (success) {
                 System.out.println("------------" + testMethodName + ": run succeed\n");
-                succeed++;
+                succeedTestCount++;
             } else {
                 System.out.println("------------" + testMethodName + ": run failed\n");
-                failed++;
+                failedTestCount++;
             }
         }
+    }
 
+    private void printResult() {
         System.out.println("------------ Test results ------------");
-        System.out.println("Run: " + (succeed + failed) + " tests");
-        System.out.println("Succeed: " + succeed + " tests");
-        System.out.println("Failed: " + failed + " tests");
-
+        System.out.println("Run: " + (succeedTestCount + failedTestCount) + " tests");
+        System.out.println("Succeed: " + succeedTestCount + " tests");
+        System.out.println("Failed: " + failedTestCount + " tests");
     }
 }
